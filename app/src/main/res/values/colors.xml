@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#060D1C</color>
+    <color name="surface">#0A1428</color>
+    <color name="tile">#112240</color>
+    <color name="tile_focus">#172C52</color>
+    <color name="divider">#22365E</color>
+    <color name="text">#EAF1FF</color>
+    <color name="muted">#8CA0C4</color>
+    <color name="accent">#3D8BFF</color>
+    <color name="glow">#553D8BFF</color>
+    <color name="live">#FF4D5E</color>
+    <color name="up">#3DDC97</color>
+    <color name="warn">#FFC857</color>
+    <color name="sun">#FFD36B</color>
+    <color name="scrim_strong">#C7060D1C</color>
+    <color name="scrim_mid">#59060D1C</color>
+    <color name="scrim_none">#00060D1C</color>
+</resources>

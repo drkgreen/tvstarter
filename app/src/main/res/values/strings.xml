@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TV Başlatıcı</string>
+
+    <string name="tab_home">HOME</string>
+    <string name="tab_apps">APPS</string>
+    <string name="tab_live">LIVE</string>
+    <string name="tab_portfolio">PORTFÖY</string>
+
+    <string name="settings">Ayarlar</string>
+    <string name="settings_wifi">Ağ ayarları</string>
+    <string name="settings_system">Sistem ayarları</string>
+    <string name="settings_home">Varsayılan ana ekran</string>
+    <string name="settings_portfolio_url">Portföy veri adresi</string>
+    <string name="open_failed">Açılamadı</string>
+    <string name="save">Kaydet</string>
+    <string name="cancel">İptal</string>
+
+    <string name="weather_feels">Hissedilen %1$d°</string>
+    <string name="weather_wind">Rüzgâr %1$d km/s</string>
+
+    <string name="apps_favorites">Favoriler</string>
+    <string name="apps_others">Diğer uygulamalar</string>
+    <string name="apps_all">Tüm uygulamalar</string>
+    <string name="apps_empty">Yüklü uygulama bulunamadı.</string>
+    <string name="menu_add_favorite">Favorilere ekle</string>
+    <string name="menu_remove_favorite">Favorilerden çıkar</string>
+    <string name="menu_app_info">Uygulama bilgisi</string>
+    <string name="menu_uninstall">Kaldır</string>
+
+    <string name="live_now">Şu an yayında</string>
+    <string name="live_inputs">TV girişleri</string>
+    <string name="live_badge">CANLI</string>
+    <string name="live_empty">Canlı kanal bulunamadı. Canlı TV uygulaması kanal bilgisini paylaşmıyor olabilir.</string>
+    <string name="live_loading">Yükleniyor…</string>
+
+    <string name="portfolio_total">TOPLAM PORTFÖY</string>
+    <string name="portfolio_gold">Altın</string>
+    <string name="portfolio_silver">Gümüş</string>
+    <string name="portfolio_empty">Portföy veri adresi ayarlı değil.\nAdresi girmek için Tamam tuşuna bas.</string>
+    <string name="portfolio_collecting">Veri biriktiriliyor</string>
+    <string name="portfolio_loading">Yükleniyor…</string>
+    <string name="portfolio_updated">Son güncelleme %1$s · 5 dakikada bir yenilenir</string>
+    <string name="portfolio_failed">Güncellenemedi: %1$s. Son veri gösteriliyor.</string>
+    <string name="portfolio_url_title">Portföy veri adresi</string>
+    <string name="portfolio_url_hint">https://…</string>
+    <string name="portfolio_ons">Ons %1$s $</string>
+    <string name="range_day">son 24 saat</string>
+    <string name="range_week">son 7 gün</string>
+    <string name="range_month">son 30 gün</string>
+
+    <string name="news_up">YÜKSELİŞ</string>
+    <string name="news_down">DÜŞÜŞ</string>
+    <string name="news_mixed">KARIŞIK</string>
+    <string name="news_unclear">BELİRSİZ</string>
+    <string name="news_level_high">Önem: Yüksek</string>
+    <string name="news_level_medium">Önem: Orta</string>
+    <string name="news_level_low">Önem: Düşük</string>
+    <string name="news_none">Henüz haber yok</string>
+</resources>

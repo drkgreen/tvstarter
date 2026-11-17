@@ -1,0 +1,87 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main, 'claude/**' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # İsteğe bağlı secret'lar. Yoksa APK sabit debug anahtarıyla imzalanır.
+      KS_B64: ${{ secrets.KEYSTORE_BASE64 }}
+      PORTFOLIO_URL: ${{ secrets.PORTFOLIO_URL }}
+
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v4
+
+      - name: Java 17 kur
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Android SDK yolunu ayarla
+        run: echo "sdk.dir=$ANDROID_HOME" > local.properties
+
+      - name: Keystore dosyasını hazırla
+        if: env.KS_B64 != ''
+        run: echo "$KS_B64" | base64 -d > keystore.jks
+
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
+
+      - name: Gradle wrapper oluştur
+        run: gradle wrapper
+
+      - name: Gradle izni ver
+        run: chmod +x gradlew
+
+      # Test kırmızıysa APK derlenmez ve yayınlanmaz.
+      - name: Birim testlerini koştur
+        run: ./gradlew testReleaseUnitTest --no-daemon
+
+      - name: Release APK derle
+        run: ./gradlew assembleRelease --no-daemon
+        env:
+          KEYSTORE_PATH: ${{ env.KS_B64 != '' && format('{0}/keystore.jks', github.workspace) || '' }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+      - name: APK yi yeniden adlandır
+        run: mv app/build/outputs/apk/release/app-release.apk tvstarter-release.apk
+
+      - name: Sürüm adını al
+        id: version
+        run: |
+          VERSION_NAME=$(grep -oP '(?<=versionName ")[^"]+' app/build.gradle)
+          echo "name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Release olarak yayınla
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: "Son Sürüm - Build #${{ github.run_number }}"
+          body: "Sürüm: ${{ steps.version.outputs.name }}"
+          make_latest: true
+          files: tvstarter-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: APK yi çıktı olarak sakla
+        if: github.ref != 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tvstarter-release
+          path: tvstarter-release.apk
