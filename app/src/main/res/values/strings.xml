@@ -27,12 +27,10 @@
     <string name="menu_remove_favorite">Favorilerden çıkar</string>
     <string name="menu_app_info">Uygulama bilgisi</string>
     <string name="menu_uninstall">Kaldır</string>
-
-    <string name="live_now">Şu an yayında</string>
-    <string name="live_inputs">TV girişleri</string>
     <string name="live_badge">CANLI</string>
-    <string name="live_empty">Canlı kanal bulunamadı. Canlı TV uygulaması kanal bilgisini paylaşmıyor olabilir.</string>
-    <string name="live_loading">Yükleniyor…</string>
+    <string name="live_title">Canlı TV</string>
+    <string name="live_hint">Kanalları TV\'nin canlı TV uygulamasında aç</string>
+    <string name="live_not_found">Bu cihazda canlı TV uygulaması bulunamadı.</string>
 
     <string name="portfolio_total">TOPLAM PORTFÖY</string>
     <string name="portfolio_gold">Altın</string>
