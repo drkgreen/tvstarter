@@ -1,7 +1,7 @@
 # TV Başlatıcı (tvstarter)
 
 Android TV ana ekran başlatıcısı. Kotlin, tek modül (`app`), view binding. Paket adı `com.tvstarter`.
-Dört sekme: HOME (saat, tarih, hava durumu, değişen arka plan), APPS (favoriler + uygulamalar), LIVE (canlı TV), PORTFÖY (altın/gümüş portföyü ve haberler).
+Dört sekme: HOME (saat, tarih, hava durumu, değişen arka plan), APPS (favoriler + uygulamalar), LIVE (canlı TV kartı), PORTFÖY (altın/gümüş portföyü ve haberler).
 Tasarım taslağı: https://claude.ai/artifact/QBPbFGCofdJVz41A625aEs
 
 ## Komutlar
@@ -32,7 +32,7 @@ Onay pencereleri ve menüler `ActionMenu` / `TextPrompt` ile kurulur. `AlertDial
 - HOME başlatıcısı: bazı Google TV ve Android TV 10+ cihazlar sistem ana ekranını zorunlu tutar. HOME tuşu bu cihazlarda bu uygulamaya gitmez. İlk HOME basışında sistem "her zaman" seçeneğini sorar.
 - Arka plan resimleri (`WallpaperFeed`): varsayılan kaynak Bing günlük resim arşividir. Resmi API değildir ve telif koşulları belirsizdir. Kaynak değişirse yalnızca `WallpaperFeed` ve `FEED_URL` değişir. Google'ın bu iş için açık API'si yok.
 - Hava durumu: konum IP adresinden bulunur (`ipwho.is`, izin gerekmez, yaklaşık şehir). Hava durumu Open-Meteo'dan gelir. İkisi de anahtarsızdır.
-- LIVE: kanallar `TvContract` ile okunur. Başka uygulamaların kanallarını okumak sistem izni ister (`READ_EPG_DATA`). İzin yoksa kanal listesi boş gelir ve yalnızca HDMI gibi doğrudan girişler listelenir. Gerçek cihazda dene.
+- LIVE: sekmede tek kart vardır ve TV'nin kendi canlı TV uygulamasını açar (`LiveTv`). Kanal listesini biz okumayız: `TvContract` ile başka uygulamaların kanallarını okumak sistem izni ister (`READ_EPG_DATA`) ve yüklenen uygulamaya verilmez. Bilinen paket adları `LiveTv.PACKAGES` ve `AndroidManifest.xml` `<queries>` içinde durur. Cihazda canlı TV uygulaması farklı bir adla gelirse iki yere de ekle. Gerçek cihazda dene.
 - PORTFÖY: veri `altin-gumus-tracker` `/api/widget-data` adresinden gelir. Adres `key=` anahtarı içerir. Anahtarı depoya yazma. İki yol var: TV'de PORTFÖY sekmesinde adresi gir (cihazda saklanır), veya CI secret'ı `PORTFOLIO_URL` ver (APK'ya gömülür ve APK'dan çıkarılabilir). Sunucu geçmiş vermez: `PortfolioHistory` her başarılı yenilemede (en az 10 dk arayla) cihazda örnek biriktirir. 1G/1H/1A grafiği bu örneklerden çizilir.
 - CI imza: `KEYSTORE_BASE64`, `STORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD` secret'ları varsa release anahtarıyla imzalar. Yoksa depodaki sabit `debug.keystore` ile imzalar. Anahtar sabit olmazsa TV'de güncelleme başarısız olur. Play Store öncesi gerçek bir anahtar gerekir.
 - Arayüz tek dildedir (Türkçe). Dizeler yalnızca `values/strings.xml` içindedir. `MainActivity` varsayılan yereli `tr-TR` yapar.
